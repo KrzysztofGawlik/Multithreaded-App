@@ -10,10 +10,12 @@ public:
 
     void show();
 
+protected:
+    sf::RenderWindow* mWindow;
+    sf::Font* font;
+
 private:
     void setup();
     void addInfoLabel();
-
-    sf::RenderWindow* mWindow;
-    sf::Font* font;
+    void handleEvents();
 };

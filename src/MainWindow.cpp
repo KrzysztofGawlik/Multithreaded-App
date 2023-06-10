@@ -8,7 +8,7 @@ void MainWindow::setup()
 {
     // Initiate new window
     std::cout << "Setting up main window..." << std::endl;
-    mWindow = new sf::RenderWindow(sf::VideoMode(400, 200), "Multithreaded Application");
+    mWindow = new sf::RenderWindow(sf::VideoMode(400, 200), "Multithreaded Application", sf::Style::Titlebar | sf::Style::Close);
     mWindow->setFramerateLimit(60);
     mWindow->clear(sf::Color::White);
 
@@ -22,7 +22,31 @@ void MainWindow::setup()
     // Setting up components
     std::cout << "Adding components..." << std::endl;
     addInfoLabel();
+}
 
+void MainWindow::show()
+{
+    mWindow->display();
+    handleEvents();
+}
+
+void MainWindow::addInfoLabel()
+{
+    std::cout << "\t- Label" << std::endl;
+    sf::Text label;
+    std::string info = "Author: Krzysztof Gawlik\nAlbum: 147762\n\nProject: Multithreaded application";
+
+    label.setFont(*font);
+    label.setString(info);
+    label.setCharacterSize(16);
+    label.setFillColor(sf::Color::Black);
+    label.setPosition(50, 50);
+
+    mWindow->draw(label);
+}
+
+void MainWindow::handleEvents()
+{
     // Handle events
     while (mWindow->isOpen())
     {
@@ -33,24 +57,4 @@ void MainWindow::setup()
                 mWindow->close();
         }
     }
-}
-
-void MainWindow::show()
-{
-    mWindow->display();
-}
-
-void MainWindow::addInfoLabel()
-{
-    std::cout << "\t- Label" << std::endl;
-    sf::Text label;
-    std::string info = "Author: Krzysztof Gawlik\nAlbum: 147762\n\nProject: Multithreaded application";
-
-    label.setFont(*font);
-    label.setString("string");
-    label.setCharacterSize(24);
-    label.setFillColor(sf::Color::Black);
-    label.setPosition(50, 50);
-
-    mWindow->draw(label);
 }

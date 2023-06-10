@@ -10,7 +10,7 @@ Button::Button(std::string text, sf::Color color, int posX, int posY)
 
     mLabel = new sf::Text();
     mLabel->setString(text);
-    mLabel->setPosition(posX + 10, posY + 10);
+    mLabel->setPosition(posX + 10, posY + 5);
     mLabel->setCharacterSize(12);
     mLabel->setColor(sf::Color::Black);
 }

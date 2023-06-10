@@ -16,6 +16,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
+# Copy font
+configure_file(resources/arial.ttf ${CMAKE_BINARY_DIR}/resources/arial.ttf COPYONLY)
+
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME}

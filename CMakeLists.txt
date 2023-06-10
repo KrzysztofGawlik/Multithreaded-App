@@ -16,8 +16,12 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
-# Copy font
-configure_file(resources/arial.ttf ${CMAKE_BINARY_DIR}/resources/arial.ttf COPYONLY)
+# Copy resources
+file(GLOB RESOURCE_FILES "resources/*")
+foreach(file ${RESOURCE_FILES})
+    get_filename_component(filename ${file} NAME)
+    configure_file(${file} ${CMAKE_BINARY_DIR}/resources/${filename} COPYONLY)
+endforeach()
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
 

@@ -14,14 +14,16 @@ void MainWindow::setup()
 
     // Load font
     mFont = new sf::Font();
-    if (!mFont->loadFromFile("resources/arial.ttf"))
-        std::cout << "Failed to load font!" << std::endl;
+    std::string path = "resources/arial.ttf";
+    if (!mFont->loadFromFile(path))
+        std::cout << "Failed to load font! (" << path << ")" << std::endl;
     else
         std::cout << "Font loaded successfully." << std::endl;
 
     // Setting up components
     std::cout << "Adding GUI components..." << std::endl;
     std::cout << "\t- Label" << std::endl;
+
     addInfoLabel("Krzysztof Gawlik", "147762", "Multithreaded application");
     std::cout << "\t- Buttons" << std::endl;
     mButtons["triButton"] = new Button("Triangle", sf::Color::Red, 350, 20);
@@ -30,8 +32,14 @@ void MainWindow::setup()
     mButtons["appThreads"] = new Button("Process\nInfo", sf::Color(200, 200, 200), 440, 70);
     mButtons["allThreads"] = new Button("Threads\nInfo", sf::Color(200, 200, 200), 530, 70);
     renderButtons(mButtons);
+
     addSeparator(325, 130, true, 10);
     addSeparator(140, 610, false, 10);
+
+    std::cout << "\t- Console View" << std::endl;
+    // Generate console here
+    ConsoleView* console = new ConsoleView(610, 130, 10, 155);
+    renderConsoleView(console);
 
     std::cout << "GUI ready." << std::endl;
 }
@@ -67,6 +75,12 @@ void MainWindow::renderButtons(std::unordered_map<std::string, Button*> map)
         mWindow->draw(shape);
         mWindow->draw(label);
     }
+}
+
+void MainWindow::renderConsoleView(ConsoleView* console)
+{
+    mWindow->draw(console->getView());
+    mWindow->draw(console->getOutput());
 }
 
 void MainWindow::addSeparator(int position, int size, bool vertical, int offset)

@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Button.h"
+#include "ConsoleView.h"
 
 class MainWindow
 {
@@ -23,6 +24,7 @@ private:
     void setup();
     void addInfoLabel(std::string author, std::string album, std::string project);
     void renderButtons(std::unordered_map<std::string, Button*> map);
+    void renderConsoleView(ConsoleView* console);
     void addSeparator(int position, int size, bool vertical, int offset);
     void handleEvents();
 };

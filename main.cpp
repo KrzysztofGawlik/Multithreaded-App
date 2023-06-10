@@ -7,7 +7,7 @@ int main(void)
     std::cout << "Application started." << std::endl;
 
     MainWindow* mainWindow = new MainWindow();
-    mainWindow->show();
+    mainWindow->start();
 
     std::cout << "Exiting application..." << std::endl;
 }

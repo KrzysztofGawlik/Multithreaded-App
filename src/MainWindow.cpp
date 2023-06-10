@@ -20,7 +20,7 @@ void MainWindow::setup()
         std::cout << "Font loaded successfully." << std::endl;
 
     // Setting up components
-    std::cout << "Adding components..." << std::endl;
+    std::cout << "Adding GUI components..." << std::endl;
     std::cout << "\t- Label" << std::endl;
     addInfoLabel();
     std::cout << "\t- Buttons" << std::endl;
@@ -32,7 +32,7 @@ void MainWindow::setup()
     std::cout << "GUI ready." << std::endl;
 }
 
-void MainWindow::show()
+void MainWindow::start()
 {
     mWindow->display();
     handleEvents();

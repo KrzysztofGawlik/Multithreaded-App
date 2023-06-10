@@ -12,7 +12,7 @@ public:
     };
     ~MainWindow() {};
 
-    void show();
+    void start();
 
 protected:
     sf::RenderWindow* mWindow;

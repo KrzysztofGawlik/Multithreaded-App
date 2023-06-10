@@ -15,5 +15,5 @@ private:
     void addInfoLabel();
 
     sf::RenderWindow* mWindow;
-    sf::Font font;
+    sf::Font* font;
 };

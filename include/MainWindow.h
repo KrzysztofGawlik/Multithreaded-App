@@ -12,6 +12,8 @@ public:
 
 private:
     void setup();
+    void addInfoLabel();
 
     sf::RenderWindow* mWindow;
+    sf::Font font;
 };

@@ -9,10 +9,9 @@ void MainWindow::setup()
     mWindow->setFramerateLimit(60);
 
     // Load font
-    sf::Font font;
     font.loadFromFile("resources/arial.ttf");
 
-    // Handle window controls
+    // Handle events
     while (mWindow->isOpen())
     {
         sf::Event event;
@@ -23,10 +22,26 @@ void MainWindow::setup()
         }
     }
 
+    addInfoLabel();
+
     mWindow->clear();
 }
 
 void MainWindow::show()
 {
     mWindow->display();
+}
+
+void MainWindow::addInfoLabel()
+{
+    sf::Text label;
+    std::string info = "Author: Krzysztof Gawlik\nAlbum: 147762\n\nProject: Multithreaded application";
+
+    label.setFont(font);
+    label.setString(info);
+    label.setCharacterSize(24);
+    label.setFillColor(sf::Color::Black);
+    label.setPosition(50, 50);
+
+    mWindow->draw(label);
 }

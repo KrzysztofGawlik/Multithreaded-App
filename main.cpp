@@ -1,8 +1,18 @@
 #include <iostream>
+#include <vector>
+#include <string>
+
+#include "Logger.h"
 
 int main(void)
 {
-    std::cout << "Application started." << std::endl;
+    Logger* logger = new Logger();
+    logger->log("Application started.");
 
-    std::cout << "Closing app..." << std::endl;
+    logger->log("Closing app...");
+    std::vector<std::string> logData = logger->getLogs();
+    for (auto log : logData)
+    {
+        std::cout << log << std::endl;
+    }
 }

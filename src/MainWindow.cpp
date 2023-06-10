@@ -8,20 +8,28 @@ void MainWindow::setup()
 {
     // Initiate new window
     std::cout << "Setting up main window..." << std::endl;
-    mWindow = new sf::RenderWindow(sf::VideoMode(400, 200), "Multithreaded Application", sf::Style::Titlebar | sf::Style::Close);
+    mWindow = new sf::RenderWindow(sf::VideoMode(800, 300), "Multithreaded Application", sf::Style::Titlebar | sf::Style::Close);
     mWindow->setFramerateLimit(60);
     mWindow->clear(sf::Color::White);
 
     // Load font
-    font = new sf::Font();
-    if (!font->loadFromFile("resources/arial.ttf"))
+    mFont = new sf::Font();
+    if (!mFont->loadFromFile("resources/arial.ttf"))
         std::cout << "Failed to load font!" << std::endl;
     else
         std::cout << "Font loaded successfully." << std::endl;
 
     // Setting up components
     std::cout << "Adding components..." << std::endl;
+    std::cout << "\t- Label" << std::endl;
     addInfoLabel();
+    std::cout << "\t- Buttons" << std::endl;
+    mButtons["triButton"] = new Button("Triangle", sf::Color::Red, 20, 150);
+    mButtons["rectButton"] = new Button("Rectangle", sf::Color::Green, 120, 150);
+    mButtons["circButton"] = new Button("Circle", sf::Color::Yellow, 220, 150);
+    renderButtons(mButtons);
+
+    std::cout << "GUI ready." << std::endl;
 }
 
 void MainWindow::show()
@@ -32,17 +40,29 @@ void MainWindow::show()
 
 void MainWindow::addInfoLabel()
 {
-    std::cout << "\t- Label" << std::endl;
     sf::Text label;
     std::string info = "Author: Krzysztof Gawlik\nAlbum: 147762\n\nProject: Multithreaded application";
 
-    label.setFont(*font);
+    label.setFont(*mFont);
     label.setString(info);
     label.setCharacterSize(16);
     label.setFillColor(sf::Color::Black);
-    label.setPosition(50, 50);
+    label.setPosition(20, 20);
 
     mWindow->draw(label);
+}
+
+void MainWindow::renderButtons(std::unordered_map<std::string, Button*> map)
+{
+    for (auto button : map)
+    {
+        sf::RectangleShape shape = button.second->getShape();
+        sf::Text label = button.second->getLabel();
+        label.setFont(*mFont);
+
+        mWindow->draw(shape);
+        mWindow->draw(label);
+    }
 }
 
 void MainWindow::handleEvents()

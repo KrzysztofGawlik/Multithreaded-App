@@ -11,6 +11,9 @@ void MainWindow::setup()
     mWindow = new sf::RenderWindow(sf::VideoMode(630, 300), "Multithreaded Application", sf::Style::Titlebar | sf::Style::Close);
     mWindow->setFramerateLimit(60);
     mWindow->clear(sf::Color::White);
+    sf::Image icon;
+    icon.loadFromFile("resources/icon.png");
+    mWindow->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     // Load font
     mFont = new sf::Font();

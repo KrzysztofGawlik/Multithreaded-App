@@ -1,4 +1,4 @@
-#include <unordered_map>
+#include <vector>
 
 #include <SFML/Graphics.hpp>
 
@@ -18,12 +18,12 @@ public:
 protected:
     sf::RenderWindow* mWindow;
     sf::Font* mFont;
-    std::unordered_map<std::string, Button*> mButtons;
+    std::vector<Button*> mButtons;
 
 private:
     void setup();
     void addInfoLabel(std::string author, std::string album, std::string project);
-    void renderButtons(std::unordered_map<std::string, Button*> map);
+    void renderButtons();
     void renderConsoleView(ConsoleView* console);
     void addSeparator(int position, int size, bool vertical, int offset);
     void handleEvents();

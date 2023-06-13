@@ -8,6 +8,8 @@ public:
 
     sf::RectangleShape getShape() { return *mShape; };
     sf::Text getLabel() { return *mLabel; };
+    bool clicked(int x, int y);
+
 private:
     sf::RectangleShape* mShape;
     sf::Text* mLabel;

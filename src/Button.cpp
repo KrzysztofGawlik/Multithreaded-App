@@ -14,3 +14,14 @@ Button::Button(std::string text, sf::Color color, int posX, int posY)
     mLabel->setCharacterSize(12);
     mLabel->setColor(sf::Color::Black);
 }
+
+bool Button::clicked(int x, int y)
+{
+    sf::Vector2f position = mShape->getPosition();
+    sf::Vector2f size = mShape->getSize();
+
+    if (x > position.x && x < (position.x + size.x))
+        if (y > position.y && y < (position.y + size.y))
+            return true;
+    return false;
+}

@@ -29,12 +29,12 @@ void MainWindow::setup()
 
     addInfoLabel("Krzysztof Gawlik", "147762", "Multithreaded application");
     std::cout << "\t- Buttons" << std::endl;
-    mButtons["triButton"] = new Button("Triangle", sf::Color::Red, 350, 20);
-    mButtons["rectButton"] = new Button("Rectangle", sf::Color::Green, 440, 20);
-    mButtons["circButton"] = new Button("Circle", sf::Color::Yellow, 530, 20);
-    mButtons["appThreads"] = new Button("Process\nInfo", sf::Color(200, 200, 200), 440, 70);
-    mButtons["allThreads"] = new Button("Threads\nInfo", sf::Color(200, 200, 200), 530, 70);
-    renderButtons(mButtons);
+    mButtons.push_back(new Button("Triangle", sf::Color::Red, 350, 20));
+    mButtons.push_back(new Button("Rectangle", sf::Color::Green, 440, 20));
+    mButtons.push_back(new Button("Circle", sf::Color::Yellow, 530, 20));
+    mButtons.push_back(new Button("Process\nInfo", sf::Color(200, 200, 200), 440, 70));
+    mButtons.push_back(new Button("Threads\nInfo", sf::Color(200, 200, 200), 530, 70));
+    renderButtons();
 
     addSeparator(325, 130, true, 10);
     addSeparator(140, 610, false, 10);
@@ -67,12 +67,12 @@ void MainWindow::addInfoLabel(std::string author, std::string album, std::string
     mWindow->draw(label);
 }
 
-void MainWindow::renderButtons(std::unordered_map<std::string, Button*> map)
+void MainWindow::renderButtons()
 {
-    for (auto button : map)
+    for (auto button : mButtons)
     {
-        sf::RectangleShape shape = button.second->getShape();
-        sf::Text label = button.second->getLabel();
+        sf::RectangleShape shape = button->getShape();
+        sf::Text label = button->getLabel();
         label.setFont(*mFont);
 
         mWindow->draw(shape);
@@ -114,6 +114,21 @@ void MainWindow::handleEvents()
         {
             if (event.type == sf::Event::Closed)
                 mWindow->close();
+
+            if (event.type == sf::Event::MouseButtonReleased 
+                && event.mouseButton.button == sf::Mouse::Left)
+            {
+                int mousePosX = event.mouseButton.x;
+                int mousePosY = event.mouseButton.y;
+
+                for (auto button : mButtons)
+                {
+                    if (button->clicked(mousePosX, mousePosY))
+                    {
+                        // Handle threads
+                    }
+                }
+            }
         }
     }
 }

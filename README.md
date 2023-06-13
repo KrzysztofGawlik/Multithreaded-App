@@ -1,3 +1,4 @@
+![alt text](https://github.com/KrzysztofGawlik/Multithreaded-App/blob/master/resources/icon.png?raw=true)
 # Multithreaded-App
 Demo application that uses multiple threads.
 Main window allows us to open other windows with spinning shapes by clicking coloured shapes.

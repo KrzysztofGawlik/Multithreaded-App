@@ -127,8 +127,19 @@ void MainWindow::handleEvents()
                     {
                         std::string shapeLabel = button->getLabel().getString();
 
-                        // Handle threads
-                        // ...
+                        if (shapeLabel == "Process\nInfo")
+                        {
+                            // Handle process info
+                        }
+                        else if (shapeLabel == "Threads\nInfo")
+                        {
+                            // Handle thread info
+                        }
+                        else
+                        {
+                            // Handle threads
+                        }
+                        
                     }
                 }
             }

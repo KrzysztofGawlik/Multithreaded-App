@@ -7,6 +7,7 @@ public:
     ~ConsoleView() {};
 
     void setupFont(std::string path);
+    void runCommand(const char* command);
 
     sf::RectangleShape getView() { return *mView; }
     sf::Text getOutput() { return *mOutput; }

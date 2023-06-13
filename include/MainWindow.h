@@ -20,12 +20,14 @@ protected:
     sf::RenderWindow* mWindow;
     sf::Font* mFont;
     std::vector<Button*> mButtons;
+    ConsoleView* mConsole;
 
 private:
     void setup();
-    void addInfoLabel(std::string author, std::string album, std::string project);
+    void addInfoLabel();
     void renderButtons();
     void renderConsoleView(ConsoleView* console);
     void addSeparator(int position, int size, bool vertical, int offset);
     void handleEvents();
+    void refreshGui();
 };

@@ -1,8 +1,11 @@
 #include "MainWindow.h"
 
 #include <iostream>
+#include <windows.h>
 
 #include <SFML/Graphics.hpp>
+
+DWORD currProcId = GetCurrentProcessId();
 
 void MainWindow::setup()
 {
@@ -27,7 +30,7 @@ void MainWindow::setup()
     std::cout << "Adding GUI components..." << std::endl;
     std::cout << "\t- Label" << std::endl;
 
-    addInfoLabel("Krzysztof Gawlik", "147762", "Multithreaded application");
+    addInfoLabel();
     std::cout << "\t- Buttons" << std::endl;
     mButtons.push_back(new Button("Triangle", sf::Color::Red, 350, 20));
     mButtons.push_back(new Button("Rectangle", sf::Color::Green, 440, 20));
@@ -41,8 +44,8 @@ void MainWindow::setup()
 
     std::cout << "\t- Console View" << std::endl;
     // Generate console here
-    ConsoleView* console = new ConsoleView(610, 130, 10, 155);
-    renderConsoleView(console);
+    mConsole = new ConsoleView(610, 130, 10, 155);
+    renderConsoleView(mConsole);
 
     std::cout << "GUI ready." << std::endl;
 }
@@ -53,10 +56,10 @@ void MainWindow::start()
     handleEvents();
 }
 
-void MainWindow::addInfoLabel(std::string author, std::string album, std::string project)
+void MainWindow::addInfoLabel()
 {
     sf::Text label;
-    std::string info = "Author: " + author + "\nAlbum: " + album + "\n\nProject: " + project;
+    std::string info = "Author: Krzysztof Gawlik\nAlbum: 147762\n\nProject: Multithreaded application";
 
     label.setFont(*mFont);
     label.setString(info);
@@ -130,10 +133,16 @@ void MainWindow::handleEvents()
                         if (shapeLabel == "Process\nInfo")
                         {
                             // Handle process info
+                            std::string command = "tasklist /fi \"PID eq " + std::to_string(currProcId) + "\"";
+                            mConsole->runCommand(command.c_str());
+                            refreshGui();
                         }
                         else if (shapeLabel == "Threads\nInfo")
                         {
                             // Handle thread info
+                            std::string command = "wmic process where \"ProcessId = " + std::to_string(currProcId) + "\" get Caption, ProcessId, ThreadCount";
+                            mConsole->runCommand(command.c_str());
+                            refreshGui();
                         }
                         else
                         {
@@ -145,4 +154,15 @@ void MainWindow::handleEvents()
             }
         }
     }
+}
+
+void MainWindow::refreshGui()
+{
+    mWindow->clear(sf::Color::White);
+    addInfoLabel();
+    renderButtons();
+    addSeparator(325, 130, true, 10);
+    addSeparator(140, 610, false, 10);
+    renderConsoleView(mConsole);
+    mWindow->display();
 }

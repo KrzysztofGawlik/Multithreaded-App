@@ -2,6 +2,9 @@
 
 #include "MainWindow.h"
 
+/**
+* @brief Main function invokes main window of the application GUI
+*/
 int main(void)
 {
     std::cout << "Application started." << std::endl;

@@ -12,8 +12,8 @@ ShapeWindow::ShapeWindow(std::string shape)
         sf::Vector2f rotationPoint(100, 100);
 
         triangle->setPoint(0, sf::Vector2f(90, 90));
-        triangle->setPoint(1, sf::Vector2f(30, 50));
-        triangle->setPoint(2, sf::Vector2f(50, 30));
+        triangle->setPoint(1, sf::Vector2f(30, 75));
+        triangle->setPoint(2, sf::Vector2f(75, 30));
         triangle->setPosition(rotationPoint.x, rotationPoint.y);
         triangle->setOrigin(rotationPoint);
 
@@ -28,7 +28,7 @@ ShapeWindow::ShapeWindow(std::string shape)
     }
     else if (shape == "Circle")
     {
-        sf::CircleShape* circle = new sf::CircleShape(50);
+        sf::CircleShape* circle = new sf::CircleShape(30);
         circle->setPosition(100, 100);
         mShape = circle;
     }

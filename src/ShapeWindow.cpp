@@ -3,5 +3,5 @@
 ShapeWindow::ShapeWindow()
 {
     mWindow = new sf::RenderWindow(sf::VideoMode(200, 200), "Shape");
-    mWindow->setFrameLimit(60);
+    mWindow->setFramerateLimit(60);
 }

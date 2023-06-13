@@ -2,7 +2,7 @@
 
 ShapeWindow::ShapeWindow(std::string shape)
 {
-    mWindow = new sf::RenderWindow(sf::VideoMode(200, 200), "Shape: " + shape);
+    mWindow = new sf::RenderWindow(sf::VideoMode(200, 200), "Shape", sf::Style::Titlebar | sf::Style::Close);
     mWindow->setFramerateLimit(60);
 
     mShape = nullptr;
@@ -32,11 +32,9 @@ ShapeWindow::ShapeWindow(std::string shape)
         circle->setPosition(100, 100);
         mShape = circle;
     }
-
-    handleEvents();
 }
 
-void ShapeWindow::handleEvents()
+void ShapeWindow::init()
 {
     while (mWindow->isOpen())
     {

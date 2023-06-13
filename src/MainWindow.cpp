@@ -125,9 +125,10 @@ void MainWindow::handleEvents()
                 {
                     if (button->clicked(mousePosX, mousePosY))
                     {
-                        // Handle threads
                         std::string shapeLabel = button->getLabel().getString();
-                        ShapeWindow* window = new ShapeWindow(shapeLabel);
+
+                        // Handle threads
+                        // ...
                     }
                 }
             }

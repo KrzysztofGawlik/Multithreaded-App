@@ -32,6 +32,7 @@ ShapeWindow::ShapeWindow(std::string shape)
         circle->setPosition(100, 100);
         mShape = circle;
     }
+    init();
 }
 
 void ShapeWindow::init()

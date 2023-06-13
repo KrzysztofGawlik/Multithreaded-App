@@ -4,6 +4,7 @@
 
 #include "Button.h"
 #include "ConsoleView.h"
+#include "ShapeWindow.h"
 
 class MainWindow
 {

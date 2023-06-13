@@ -1,7 +1,8 @@
-#include <iostream>
-#include <SFML/Graphics.hpp>
-
 #include "ConsoleView.h"
+
+#include <iostream>
+
+#include <SFML/Graphics.hpp>
 
 ConsoleView::ConsoleView(int width, int height, int offsetX, int offsetY)
 {

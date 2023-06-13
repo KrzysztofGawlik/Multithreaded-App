@@ -1,8 +1,8 @@
+#include "MainWindow.h"
+
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
-
-#include "MainWindow.h"
 
 void MainWindow::setup()
 {

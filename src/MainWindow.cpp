@@ -134,6 +134,7 @@ void MainWindow::handleEvents()
                         if (shapeLabel == "Process\nInfo")
                         {
                             // Handle process info
+                            std::cout << "Process info requested." << std::endl;
                             std::string command = "tasklist /fi \"PID eq " + std::to_string(currProcId) + "\"";
                             mConsole->runCommand(command.c_str());
                             refreshGui();
@@ -141,6 +142,7 @@ void MainWindow::handleEvents()
                         else if (shapeLabel == "Threads\nInfo")
                         {
                             // Handle thread info
+                            std::cout << "Threads info requested." << std::endl;
                             std::string command = "wmic process where \"ProcessId = " + std::to_string(currProcId) + "\" get Caption, ProcessId, ThreadCount";
                             mConsole->runCommand(command.c_str());
                             refreshGui();
@@ -152,6 +154,7 @@ void MainWindow::handleEvents()
                                 subwindow->init();
                             };
                             std::thread thread(createSubwindowOnNewThread, shapeLabel);
+                            std::cout << "New thread started." << std::endl;
                             thread.detach();
                         }
                     }

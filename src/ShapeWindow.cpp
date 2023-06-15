@@ -1,5 +1,7 @@
 #include "ShapeWindow.h"
 
+#include <iostream>
+
 ShapeWindow::ShapeWindow(std::string shape)
 {
     mWindow = new sf::RenderWindow(sf::VideoMode(200, 200), "Shape", sf::Style::Titlebar | sf::Style::Close);
@@ -45,7 +47,10 @@ void ShapeWindow::init()
         while (mWindow->pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
+            {
                 mWindow->close();
+                std::cout << "Closing thread..." << std::endl;
+            }
         }
 
         mWindow->clear();

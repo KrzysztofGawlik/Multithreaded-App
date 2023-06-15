@@ -4,6 +4,9 @@ ShapeWindow::ShapeWindow(std::string shape)
 {
     mWindow = new sf::RenderWindow(sf::VideoMode(200, 200), "Shape", sf::Style::Titlebar | sf::Style::Close);
     mWindow->setFramerateLimit(60);
+    sf::Image icon;
+    icon.loadFromFile("resources/icon.png");
+    mWindow->setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     mShape = nullptr;
     if (shape == "Triangle")

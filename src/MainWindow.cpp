@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <windows.h>
+#include <thread>
 
 #include <SFML/Graphics.hpp>
 
@@ -146,9 +147,13 @@ void MainWindow::handleEvents()
                         }
                         else
                         {
-                            // Handle threads
+                            auto createSubwindowOnNewThread = [=](std::string shape) {
+                                ShapeWindow* subwindow = new ShapeWindow(shapeLabel);
+                                subwindow->init();
+                            };
+                            std::thread thread(createSubwindowOnNewThread, shapeLabel);
+                            thread.detach();
                         }
-                        
                     }
                 }
             }

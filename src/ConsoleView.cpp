@@ -2,34 +2,38 @@
 
 #include <iostream>
 #include <cstdio>
-
+#include <memory>
 #include <SFML/Graphics.hpp>
+
+const int BUFFER_SIZE = 128;
+const int CHARACTER_SIZE = 12;
 
 ConsoleView::ConsoleView(int width, int height, int offsetX, int offsetY)
 {
-    mView = new sf::RectangleShape(sf::Vector2f(width, height));
+    mView = std::make_unique<sf::RectangleShape>(sf::Vector2f(width, height));
     mView->setPosition(offsetX, offsetY);
     mView->setFillColor(sf::Color::Black);
-    
-    mOutput = new sf::Text();
+
+    mOutput = std::make_unique<sf::Text>();
     mOutput->setString("Console #\n\nPress any Info button to display results . . .");
     mOutput->setPosition(offsetX + 5, offsetY + 5);
     setupFont("resources/consolas.ttf");
     mOutput->setFont(*mFont);
-    mOutput->setCharacterSize(12);
+    mOutput->setCharacterSize(CHARACTER_SIZE);
 }
 
-void ConsoleView::setupFont(std::string path)
+void ConsoleView::setupFont(const std::string& path)
 {
-    mFont = new sf::Font();
-    if (!mFont->loadFromFile(path))
-        std::cout << "Failed to load font! (" << path << ")" << std::endl;
+    mFont = std::make_unique<sf::Font>();
+    if (!mFont->loadFromFile(path)) {
+        throw std::runtime_error("Failed to load font: " + path);
+    }
 }
 
 void ConsoleView::runCommand(const char* command)
 {
     std::string result;
-    char buffer[128];
+    char buffer[BUFFER_SIZE];
 
     FILE* pipe = _popen(command, "r");
     if (!pipe) {
@@ -37,7 +41,7 @@ void ConsoleView::runCommand(const char* command)
     }
 
     while (!feof(pipe)) {
-        if (fgets(buffer, 128, pipe) != nullptr) {
+        if (fgets(buffer, BUFFER_SIZE, pipe) != nullptr) {
             result += buffer;
         }
     }
